@@ -1,0 +1,74 @@
+{% include "header.html" %}
+    <div class="title">
+        <h1>Parties</h1>
+        <hr>
+        <div class="subtitle">
+            <h3>Welcome, {{ user.name }}</h3>
+        </div>
+    </div>
+    <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="flash">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    {% for party in all_parties %}
+        <div class="card">
+          <div class="card-header">
+            <h4>Party name: {{ party.party_name }}</h4>
+            <h5>Members: {{ party.current_members }} / {{ party.max_members }}</h5>
+            <h5>Location: {{ party.location }}</h5>
+            <h5>Time: {{ party.time }}</h5>
+            {% if user.id == party.creator_id %}
+              <form class="btn" action="{{ url_for('edit_party', party_id=party.id) }}" method="post">
+                <button class="btn btn-outline-primary join-btn" type="submit">Edit</button>
+              </form>
+              <form class="btn" action="{{ url_for('delete_party', party_id=party.id) }}" method="post">
+                <button class="btn btn-outline-primary join-btn" type="submit">Delete</button>
+              </form>
+            {% endif %}
+          </div>
+          <div class="card-body">
+            {% for member in party.members %}
+                <!-- creator of party cannot be deleted -->
+                {% if member.member_id == party.creator_id %}
+                    <p>{{ member.name }} | {{ member.email }} (Creator)</p>
+                <!-- current user is creator of party -->
+                {% elif party.creator_id == user.id %}
+                    <p>
+                        {{ member.name }} | {{ member.email }} |
+                        <a href="{{ url_for('delete_member', member_id=member.member_id, party_id=party.id) }}">Remove</a>
+                    </p>
+
+                <!-- current user is member of party -->
+                {% elif member.member_id == user.id %}
+                    <p>
+                        {{ member.name }} | {{ member.email }} |
+                        <a href="{{ url_for('delete_member', member_id=member.member_id, party_id=party.id) }}">Leave</a>
+                    </p>
+
+                {% else %}
+                    <p>{{ member.name }} | {{ member.email }}</p>
+                {% endif %}
+            {% endfor %}
+          </div>
+          <form action="{{ url_for('join_party') }}" method="post">
+              <button class="btn btn-outline-primary join-btn" name="party_id" type="submit" value="{{ party.id }}">Join</button>
+          </form>
+        </div>
+    {% endfor %}
+
+    <div class="button-container">
+        <form action="{{ url_for('create_party') }}" method="get">
+          <input class="btn btn-lg btn-outline-primary" type="submit" value="Create new party"/>
+        </form>
+        <form action="{{ url_for('logout') }}" method="get">
+          <input class="btn btn-lg btn-outline-primary" type="submit" value="Logout"/>
+        </form>
+    </div>
+
+{% include "footer.html" %}

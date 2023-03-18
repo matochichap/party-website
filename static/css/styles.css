@@ -1,0 +1,99 @@
+/* Colours
+#F9F7F7
+#DBE2EF
+#3F72AF
+#5961BD
+#E1E3EF
+#112D4E */
+
+body {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #E1E3EF;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 500%;
+  color: #5961BD;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 300%;
+  color: #3F72AF;
+}
+
+h4 {
+  font-weight: 500;
+  font-size: 200%;
+  color: #3F72AF
+}
+
+h5 {
+  font-weight: 450;
+  font-size: 150%;
+}
+
+p {
+  margin: 0.5rem 0;
+  font-weight: 400;
+  color: #112D4E;
+}
+
+hr {
+  margin: 3% 15%;
+  border: 1px solid #112D4E;
+}
+
+/* general classes */
+.title {
+  padding: 2% 5%;
+}
+
+.subtitle {
+  font-family: 'Ubuntu';
+  padding: 0% 5%;
+}
+
+.messages {
+  padding: 0% 5%;
+}
+
+.form {
+  text-align: left;
+  padding: 1% 10%
+}
+
+.flash {
+  margin: 0%;
+  color: red;
+  font-size: 120%;
+  font-weight: 500;
+}
+
+.error {
+  display: none
+}
+
+/* parties.html */
+
+.join-btn {
+  margin: 0 3% 5%;
+}
+
+.button-container form {
+  margin: 2% 0;
+}
+
+
+
+/* override classes */
+.help-block {
+  color: red;
+}
+
+.card {
+  border-radius: 1rem;
+  margin: 3% 20%;
+}
