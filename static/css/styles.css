@@ -42,18 +42,13 @@ p {
 }
 
 hr {
-  margin: 3% 15%;
+  margin: 3% 15% 1%;
   border: 1px solid #112D4E;
 }
 
 /* general classes */
 .title {
   padding: 2% 5%;
-}
-
-.subtitle {
-  font-family: 'Ubuntu';
-  padding: 0% 5%;
 }
 
 .messages {
@@ -63,6 +58,10 @@ hr {
 .form {
   text-align: left;
   padding: 1% 10%
+}
+
+.buffer {
+  margin: 2rem 0;
 }
 
 .flash {
@@ -78,15 +77,17 @@ hr {
 
 /* parties.html */
 
-.join-btn {
+.btn-setup {
   margin: 0 3% 5%;
 }
 
 .button-container form {
-  margin: 2% 0;
+  margin: 1rem 0;
 }
 
-
+.party-name {
+  margin: 2% 0;
+}
 
 /* override classes */
 .help-block {
@@ -95,5 +96,17 @@ hr {
 
 .card {
   border-radius: 1rem;
-  margin: 3% 20%;
+  margin: 2% 25%;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.navbar {
+  padding: 1% 1;
+  background-color: #DBE2EF
 }

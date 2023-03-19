@@ -1,10 +1,14 @@
 {% include "header.html" %}
+    <nav class="navbar navbar-light fixed-top">
+        <span class="navbar-brand mb-0 h1">User: {{ user.name }}</span>
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}" method="get">
+          <input class="btn btn-outline-primary" type="submit" value="Logout"/>
+        </form>
+    </nav>
+    <div class="buffer"></div>
     <div class="title">
         <h1>Parties</h1>
         <hr>
-        <div class="subtitle">
-            <h3>Welcome, {{ user.name }}</h3>
-        </div>
     </div>
     <div class="messages">
         {% with messages = get_flashed_messages() %}
@@ -15,20 +19,28 @@
             {% endif %}
         {% endwith %}
     </div>
-
+    <div class="button-container">
+        <form action="{{ url_for('create_party') }}" method="get">
+            <input class="btn btn-lg btn-outline-primary" type="submit" value="Create new party"/>
+        </form>
+    </div>
     {% for party in all_parties %}
         <div class="card">
           <div class="card-header">
-            <h4>Party name: {{ party.party_name }}</h4>
+            <h4 class="party-name">Party name: {{ party.party_name }}</h4>
             <h5>Members: {{ party.current_members }} / {{ party.max_members }}</h5>
             <h5>Location: {{ party.location }}</h5>
             <h5>Time: {{ party.time }}</h5>
             {% if user.id == party.creator_id %}
               <form class="btn" action="{{ url_for('edit_party', party_id=party.id) }}" method="post">
-                <button class="btn btn-outline-primary join-btn" type="submit">Edit</button>
+                <button class="btn btn-outline-primary btn-setup" type="submit">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                </button>
               </form>
               <form class="btn" action="{{ url_for('delete_party', party_id=party.id) }}" method="post">
-                <button class="btn btn-outline-primary join-btn" type="submit">Delete</button>
+                <button class="btn btn-outline-primary btn-setup" type="submit">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
               </form>
             {% endif %}
           </div>
@@ -57,18 +69,8 @@
             {% endfor %}
           </div>
           <form action="{{ url_for('join_party') }}" method="post">
-              <button class="btn btn-outline-primary join-btn" name="party_id" type="submit" value="{{ party.id }}">Join</button>
+              <button class="btn btn-outline-primary btn-setup" name="party_id" type="submit" value="{{ party.id }}">Join</button>
           </form>
         </div>
     {% endfor %}
-
-    <div class="button-container">
-        <form action="{{ url_for('create_party') }}" method="get">
-          <input class="btn btn-lg btn-outline-primary" type="submit" value="Create new party"/>
-        </form>
-        <form action="{{ url_for('logout') }}" method="get">
-          <input class="btn btn-lg btn-outline-primary" type="submit" value="Logout"/>
-        </form>
-    </div>
-
 {% include "footer.html" %}

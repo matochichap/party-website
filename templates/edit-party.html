@@ -1,11 +1,15 @@
 {% include "header.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+    <nav class="navbar navbar-light fixed-top">
+        <span class="navbar-brand mb-0 h1">Creator: {{ user.name }}</span>
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('logout') }}" method="get">
+          <input class="btn btn-outline-primary" type="submit" value="Logout"/>
+        </form>
+    </nav>
+    <div class="buffer"></div>
     <div class="title">
         <h1>Edit party</h1>
         <hr>
-        <div class="subtitle">
-            <h3>Creator: {{ user.name }}</h3>
-        </div>
     </div>
     <div class="messages">
         {% with messages = get_flashed_messages() %}

@@ -254,6 +254,8 @@ def edit_party(party_id):
             if party.current_members <= form.max_members.data <= MAX_ALLOWED_MEMBERS:
                 party.party_name = form.party_name.data
                 party.max_members = form.max_members.data
+                party.location = form.location.data
+                party.time = form.time.data
                 db.session.commit()
                 return redirect(url_for("parties"))
             else:
